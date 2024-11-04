@@ -1,2 +1,2 @@
 ###
-get http://localhost:5000/women
+post http://localhost:5000/user/create
