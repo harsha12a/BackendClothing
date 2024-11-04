@@ -1,2 +1,10 @@
 ###
 post http://localhost:5000/user/create
+Content-Type: application/json
+
+{
+    "name": "red",
+    "email": "red@gmail.com",
+    "password": "red",
+    "contact": 1231231231
+}

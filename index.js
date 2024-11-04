@@ -1,16 +1,15 @@
 const express = require('express');
-const { MongoClient } = require('mongodb');
 const userApp = require('./routes/userRoute');
 const watchApp = require('./routes/watchRoute');
 const hatApp = require('./routes/hatRoute');
 const shoeApp = require('./routes/shoeRoute');
 const menApp = require('./routes/menRoute');
 const womenApp = require('./routes/womenRoute');
+const mClient = require('./config/mongoConfig');
 
 let app = express();
 require('dotenv').config();
 
-let mClient = new MongoClient(process.env.DATABASE_URL);
 
 mClient.connect().then((connectobj)=>{
     const clothstore = connectobj.db('clothstore');
