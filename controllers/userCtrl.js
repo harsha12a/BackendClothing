@@ -9,8 +9,9 @@ const createuser = expasync(async(req,res) =>{
     else{
         let newPass = newUser.password
         newUser.password = await bcrypt.hash(newPass,10)
+        newUser.cart = []
         let response = await user.insertOne(newUser)
-        res.send({message:response,paylad:newUser})
+        res.send({message:'ok',paylad:newUser})
     }
 })
 

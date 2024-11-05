@@ -6,10 +6,15 @@ const shoeApp = require('./routes/shoeRoute');
 const menApp = require('./routes/menRoute');
 const womenApp = require('./routes/womenRoute');
 const mClient = require('./config/mongoConfig');
+const cors = require('cors');
+
 
 let app = express();
 require('dotenv').config();
 
+app.use(cors({
+    origin:'*'
+}));
 
 mClient.connect().then((connectobj)=>{
     const clothstore = connectobj.db('clothstore');
