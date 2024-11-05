@@ -15,7 +15,21 @@ const createuser = expasync(async(req,res) =>{
 })
 
 const getuser = expasync(async(req,res) =>{
-    console.log('hello')
+    const user = req.app.get('users')
+    let result = await user.findOne({username:{$eq:req.body.username}})
+    if(result){
+        let userPass = result.password
+        let checkPass = await bcrypt.compare(req.body.password,userPass)
+        if(checkPass){
+            res.send({message:'Login ok',payload:result})
+        }
+        else{
+            res.send({message:'Wrong password'})
+        }
+    }
+    else{
+        res.send({message:'User not found'})
+    }
 })
 
 module.exports = {createuser,getuser}

@@ -5,6 +5,6 @@ const {createuser,getuser} = require('../controllers/userCtrl')
 router.use(express.json())
 
 router.post('/create',createuser)
-router.get('/get',getuser)
+router.post('/get',getuser)
 
 module.exports = router

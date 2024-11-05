@@ -9,3 +9,15 @@ Content-Type: application/json
     "password": "red",
     "contact": 1231231231
 }
+
+###
+post http://localhost:5000/user/get
+Content-Type: application/json
+
+{
+    "username": "red",
+    "password": "red"
+}
+
+###
+get http://localhost:5000/watch/get
