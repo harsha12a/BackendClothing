@@ -33,7 +33,7 @@ const getuser = expasync(async(req,res) =>{
     }
 })
 
-const putuser = expasync(async(req,res)=>{
+const addcart = expasync(async(req,res)=>{
     let user = req.app.get('users')
     let response = await user.findOne({username:req.body.username})
     if(response===null) res.send({message:'User not found'})
