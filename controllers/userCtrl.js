@@ -33,4 +33,12 @@ const getuser = expasync(async(req,res) =>{
     }
 })
 
+const putuser = expasync(async(req,res)=>{
+    let user = req.app.get('users')
+    let response = await user.findOne({username:req.body.username})
+    if(response===null) res.send({message:'User not found'})
+    let result = await user.updateOne({username:req.body.username},{$set:req.body})
+    res.send({message:'ok',payload:result})
+})
+
 module.exports = {createuser,getuser}
