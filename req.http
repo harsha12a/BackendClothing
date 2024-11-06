@@ -24,4 +24,4 @@ get http://localhost:5000/hat/get
 
 ###
 
-get http://localhost:5000/women/get
+get http://localhost:5000/men/get/1
