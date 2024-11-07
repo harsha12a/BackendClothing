@@ -35,10 +35,12 @@ const getuser = expasync(async(req,res) =>{
 
 const addcart = expasync(async(req,res)=>{
     let user = req.app.get('users')
-    let response = await user.findOne({username:req.body.username})
+    let Username = req.params.username
+    let cart = req.body.cart
+    let response = await user.findOne({username:Username})
     if(response===null) res.send({message:'User not found'})
-    let result = await user.updateOne({username:req.body.username},{$set:req.body})
-    res.send({message:'ok',payload:result})
+    let result = await user.updateOne({username:Username},{$set:{cart:cart}})
+    res.send({message:'ok',payload:response})
 })
 
-module.exports = {createuser,getuser}
+module.exports = {createuser,getuser,addcart}
