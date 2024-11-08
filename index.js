@@ -6,9 +6,8 @@ const shoeApp = require('./routes/shoeRoute');
 const menApp = require('./routes/menRoute');
 const womenApp = require('./routes/womenRoute');
 const mClient = require('./config/mongoConfig');
-const {createServer} = require('http')
 const cors = require('cors');
-
+app.use(express.json())
 
 let app = express();
 require('dotenv').config();
@@ -57,4 +56,4 @@ app.get('/',(req,res)=>{
     res.send('Welcome to the Clothing Store API')
 })
 
-module.exports = createServer(app)
+module.exports = app
