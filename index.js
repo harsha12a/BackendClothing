@@ -6,6 +6,7 @@ const shoeApp = require('./routes/shoeRoute');
 const menApp = require('./routes/menRoute');
 const womenApp = require('./routes/womenRoute');
 const mClient = require('./config/mongoConfig');
+const {createServer} = require('http')
 const cors = require('cors');
 
 
@@ -56,4 +57,4 @@ app.get('/',(req,res)=>{
     res.send('Welcome to the Clothing Store API')
 })
 
-module.exports = app
+module.exports = createServer(app)
