@@ -1,5 +1,6 @@
 const expasync = require('express-async-handler')
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 
 const createuser = expasync(async(req,res) =>{
     let user = req.app.get('users')
@@ -11,7 +12,7 @@ const createuser = expasync(async(req,res) =>{
         newUser.password = await bcrypt.hash(newPass,10)
         newUser.cart = []
         let response = await user.insertOne(newUser)
-        res.send({message:'ok',paylad:newUser})
+        res.send({message:'ok',payload:newUser})
     }
 })
 
@@ -22,7 +23,8 @@ const getuser = expasync(async(req,res) =>{
         let userPass = result.password
         let checkPass = await bcrypt.compare(req.body.password,userPass)
         if(checkPass){
-            res.send({message:'Login ok',payload:result})
+            let signedToken=jwt.sign({username:req.body.username},process.env.SECRET_KEY,{expiresIn:'10hr'})
+            res.send({message:'Login ok',payload:result,token:signedToken})
         }
         else{
             res.send({message:'Wrong password'})
