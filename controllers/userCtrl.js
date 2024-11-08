@@ -43,4 +43,19 @@ const addcart = expasync(async(req,res)=>{
     res.send({message:'ok',payload:response})
 })
 
-module.exports = {createuser,getuser,addcart}
+const removecart = expasync(async(req,res)=>{
+    let user = req.app.get('users')
+    let Username = req.params.username
+    let {id, type} = req.body
+    let response = await user.findOne({username:Username})
+    if(response===null){
+        return res.send({message:'User not found'})
+    }
+    let cart = response.cart.filter(x=>!(x.id===id && x.type===type))
+    let result = await user.updateOne({username:Username},{$set:{cart:cart}})
+    if(result.modifiedCount===0) return res.send({message:'Failed to update cart'})
+    let newUser = await user.findOne({username:Username})
+    res.send({message:'ok',payload:newUser})
+})
+
+module.exports = {createuser, getuser, addcart, removecart}
