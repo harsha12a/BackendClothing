@@ -55,3 +55,5 @@ app.use((err,req,res,next)=>{
 app.get('/',(req,res)=>{
     res.send('Welcome to the Clothing Store API')
 })
+
+module.exports = app
