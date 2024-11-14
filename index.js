@@ -44,14 +44,14 @@ app.use('/shoe',shoeApp)
 app.use('/men',menApp)
 app.use('/women',womenApp)
 
+app.get('/',(req,res)=>{
+    res.send('Welcome to the Clothing Store API')
+})
+
 app.use('*',(req,res,next)=>{
     res.send('404 not found')
 })
 
 app.use((err,req,res,next)=>{
     res.send({message:'Error',errMsg:err})
-})
-
-app.get('/',(req,res)=>{
-    res.send('Welcome to the Clothing Store API')
 })
